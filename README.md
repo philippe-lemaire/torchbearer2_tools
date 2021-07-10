@@ -1,10 +1,5 @@
-# Data analysis
-- Document here the project: torchbearer2_tools
-- Description: Project Description
-- Data Source:
-- Type of analysis:
-
-Please document the project the better you can.
+# Intro
+This is a set of tools to help understand and run the upcoming table top RPG Torchbearer 2nd Edition by Thor Olavsrud and Luke Crane.
 
 # Startup the project
 
@@ -21,12 +16,6 @@ Unittest test:
 ```bash
 make clean install test
 ```
-
-Check for torchbearer2_tools in gitlab.com/{group}.
-If your project is not set please add it:
-
-- Create a new project on `gitlab.com/{group}/torchbearer2_tools`
-- Then populate it:
 
 ```bash
 ##   e.g. if group is "{group}" and project_name is "torchbearer2_tools"
