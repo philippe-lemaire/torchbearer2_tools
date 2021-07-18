@@ -1,5 +1,5 @@
 class Character:
-    def init(self, name, class_):
+    def __init__(self, name, class_):
         self.name = name
         self.class_ = class_
         class_to_stock_dict = {
@@ -26,7 +26,7 @@ class Character:
         }
         self.nature = [3, stock_to_nature_dict[self.stock]]
         self.conditions = {
-            "fresh": False,
+            "fresh": True,
             "hungry_and_thirsty": False,
             "angry": False,
             "afraid": False,
@@ -37,4 +37,5 @@ class Character:
         }
 
     def __repr__(self):
-        return f"{self.name} is a level {self.level} {self.class_}"
+        return f"""{self.name} is a level {self.level} {self.class_}.
+        Current conditions are: {" and ".join([cond for cond in self.conditions.keys() if self.conditions[cond]])}."""
