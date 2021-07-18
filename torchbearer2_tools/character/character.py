@@ -1,5 +1,6 @@
 from torchbearer2_tools.character.skills import skills
 from torchbearer2_tools.character.traits import traits
+from torchbearer2_tools.roller import Roller
 
 
 class Character:
@@ -61,3 +62,24 @@ class Character:
 
     def __repr__(self):
         return f'Character("{self.name}", "{self.class_}")'
+
+    def roll_with_nature(self):
+        r = Roller()
+        raw_result, successes = r.roll(self.nature["rating"])
+        print(f"Result: {raw_result}, {successes} successes.")
+        if (
+            len(
+                [
+                    die
+                    for die in r.last_raw_result
+                    if die.value == 6 and not die.exploded
+                ]
+            )
+            > 0
+        ):
+            response = ""
+            while response not in ["Yes", "Y", "yes", "y", "No", "N", "no", "n"]:
+                response = input("Do you want to spend Persona to reroll 6s?")
+            if response in ["Yes", "Y", "yes", "y"]:
+                raw_result, successes = r.reroll6()
+            print(f"Final result: {raw_result}, {successes} successes.")
