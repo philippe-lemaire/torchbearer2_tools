@@ -22,6 +22,8 @@ class Character:
         self.goal = ""
         self.will = {"rating": 0, "passed": 0, "failed": 0}
         self.health = {"rating": 0, "passed": 0, "failed": 0}
+        self.resources = {"rating": 0, "passed": 0, "failed": 0}
+        self.circles = {"rating": 0, "passed": 0, "failed": 0}
         self.persona = 0
         self.fate = 0
         self.skills = {
