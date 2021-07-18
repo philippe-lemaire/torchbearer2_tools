@@ -36,7 +36,7 @@ class Character:
             "Halfling": "Sneaking, Riddling, Merrymaking",
             "Human": "Boasting, Demanding, Running",
         }
-        self.nature = [3, stock_to_nature_dict[self.stock]]
+        self.nature = {"rating": 3, "descriptors": stock_to_nature_dict[self.stock]}
         self.conditions = {
             "fresh": True,
             "hungry_and_thirsty": False,
