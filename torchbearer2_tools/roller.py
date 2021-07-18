@@ -27,6 +27,22 @@ class Roller:
             self.successes = successes
         return raw_result, successes
 
+    def deeper_understanding(self):
+        """This method rerolls one single failed dice on a roll related to one of their wises."""
+        if len([die for die in self.last_raw_result if die.value <= 3]) == 0:
+            print("""No wyrm to reroll""")
+            return None
+        index_to_remove = 0
+        for index, die in enumerate(self.last_raw_result):
+            if die.value <= 3:
+                index_to_remove = index
+        self.last_raw_result.pop(index_to_remove)
+        new_dice = Dice()
+        self.last_raw_result.insert(index_to_remove, new_dice)
+        if new_dice.value >= 4:
+            self.successes += 1
+        return self.last_raw_result, self.successes
+
     def reroll6(self):
         """This method rerolls any 6s that came out (and eventual new 6s) when characters
         spend Persona points or use an ability allowing them to reroll 6s on their last roll."""
