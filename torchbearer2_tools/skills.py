@@ -7,7 +7,7 @@ skills = {
         "gear": "Formulæ",
         "factors": [],
     },
-    "name": {
+    "arcanist": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -15,7 +15,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "armorer": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -23,7 +23,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "carpenter": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -31,7 +31,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "cartographer": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -39,7 +39,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "commander": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -47,7 +47,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "cook": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -55,7 +55,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "criminal": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -63,7 +63,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "dungeoneer": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -71,7 +71,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "fighter": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -79,7 +79,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "haggler": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -87,7 +87,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "healer": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -95,7 +95,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "hunter": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -103,7 +103,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "laborer": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -111,7 +111,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "lore master": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -119,7 +119,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "manipulator": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -127,7 +127,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "mentor": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -135,7 +135,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "orator": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -143,7 +143,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "pathfinder": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -151,7 +151,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "peasant": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -159,7 +159,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "persuader": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -167,7 +167,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "rider": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -175,7 +175,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "ritualist": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -183,7 +183,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "sailor": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -191,7 +191,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "sapper": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -199,7 +199,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "scavenger": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -207,7 +207,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "scholar": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -215,7 +215,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "scout": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -223,7 +223,7 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "steward": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
@@ -231,7 +231,31 @@ skills = {
         "gear": "",
         "factors": [],
     },
-    "name": {
+    "stonemason": {
+        "description": "",
+        "beginners_luck": "",
+        "help": [""],
+        "supplies": [],
+        "gear": "",
+        "factors": [],
+    },
+    "survivalist": {
+        "description": "",
+        "beginners_luck": "",
+        "help": [""],
+        "supplies": [],
+        "gear": "",
+        "factors": [],
+    },
+    "theologian": {
+        "description": "",
+        "beginners_luck": "",
+        "help": [""],
+        "supplies": [],
+        "gear": "",
+        "factors": [],
+    },
+    "weaver": {
         "description": "",
         "beginners_luck": "",
         "help": [""],
