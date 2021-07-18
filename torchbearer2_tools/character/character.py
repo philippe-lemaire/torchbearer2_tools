@@ -1,5 +1,4 @@
-from torchbearer2_tools.skills import skills
-import numpy as np
+from torchbearer2_tools.character.skills import skills
 
 
 class Character:
