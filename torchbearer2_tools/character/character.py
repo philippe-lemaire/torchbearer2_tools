@@ -35,12 +35,16 @@ class Character:
         self.wises = {}
         self.traits = {trait: 0 for trait in traits.keys()}
         stock_to_nature_dict = {
-            "Dwarf": "Delving, Crafting, Avenging Grudges",
-            "Elf": "Singing, Remembering and Hiding",
-            "Halfling": "Sneaking, Riddling, Merrymaking",
-            "Human": "Boasting, Demanding, Running",
+            "Dwarf": ["Delving", "Crafting", "Avenging Grudges"],
+            "Elf": ["Singing", "Remembering", "Hiding"],
+            "Halfling": ["Sneaking", "Riddling", "Merrymaking"],
+            "Human": ["Boasting", "Demanding", "Running"],
         }
-        self.nature = {"rating": 3, "descriptors": stock_to_nature_dict[self.stock]}
+        self.nature = {
+            "current_rating": 3,
+            "max_rating": 3,
+            "descriptors": stock_to_nature_dict[self.stock],
+        }
         self.conditions = {
             "fresh": True,
             "hungry_and_thirsty": False,
@@ -63,23 +67,43 @@ class Character:
     def __repr__(self):
         return f'Character("{self.name}", "{self.class_}")'
 
-    def roll_with_nature(self):
+    def roll_with_nature(self, obstacle):
+        without = False
+        response = ""
+        while response not in ["Yes", "Y", "yes", "y", "No", "N", "no", "n"]:
+            response = input(
+                f"""Is this action involving one of your nature’s descriptors ({", ".join(self.nature['descriptors'])})?"""
+            )
+        if response in ["No", "N", "no", "n"]:
+            without = True
+
         r = Roller()
         raw_result, successes = r.roll(self.nature["rating"])
         print(f"Result: {raw_result}, {successes} successes.")
-        if (
-            len(
-                [
-                    die
-                    for die in r.last_raw_result
-                    if die.value == 6 and not die.exploded
-                ]
-            )
-            > 0
-        ):
-            response = ""
-            while response not in ["Yes", "Y", "yes", "y", "No", "N", "no", "n"]:
-                response = input("Do you want to spend Persona to reroll 6s?")
-            if response in ["Yes", "Y", "yes", "y"]:
-                raw_result, successes = r.reroll6()
-            print(f"Final result: {raw_result}, {successes} successes.")
+        if successes >= obstacle:
+            print("You overcame the obstacle")
+        else:
+            print("You fell short")
+            if (
+                len(
+                    [
+                        die
+                        for die in r.last_raw_result
+                        if die.value == 6 and not die.exploded
+                    ]
+                )
+                > 0
+            ):
+                response = ""
+                while response not in ["Yes", "Y", "yes", "y", "No", "N", "no", "n"]:
+                    response = input("Do you want to spend Persona to reroll 6s?")
+                if response in ["Yes", "Y", "yes", "y"]:
+                    raw_result, successes = r.reroll6()
+                print(f"Final result: {raw_result}, {successes} successes.")
+                if successes >= obstacle:
+                    print("You finally overcame the obstacle")
+                else:
+                    print("You still fall short")
+                    if without:
+                        print("Your nature is temporarily reduced by 1.")
+                        self.nature["current_rating"] -= 1
