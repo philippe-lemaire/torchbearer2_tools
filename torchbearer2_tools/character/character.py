@@ -24,10 +24,7 @@ class Character:
         self.health = 0
         self.persona = 0
         self.fate = 0
-        self.skills = {
-            skill: rating
-            for skill, rating in zip(skills.keys(), np.zeros(len(skills.keys())))
-        }
+        self.skills = {skill: 0 for skill in skills.keys()}
         stock_to_nature_dict = {
             "Dwarf": "Delving, Crafting, Avenging Grudges",
             "Elf": "Singing, Remembering and Hiding",
