@@ -93,11 +93,13 @@ class Character:
                     ]
                 )
                 > 0
+                and self.fate > 0
             ):
                 response = ""
                 while response not in ["Yes", "Y", "yes", "y", "No", "N", "no", "n"]:
-                    response = input("Do you want to spend Persona to reroll 6s?")
+                    response = input("Do you want to spend Fate to reroll 6s?")
                 if response in ["Yes", "Y", "yes", "y"]:
+                    self.fate -= 1
                     raw_result, successes = r.reroll6()
                 print(f"Final result: {raw_result}, {successes} successes.")
                 if successes >= obstacle:
