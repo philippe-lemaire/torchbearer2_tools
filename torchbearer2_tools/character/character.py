@@ -24,11 +24,14 @@ class Character:
         self.health = {"rating": 0, "passed": 0, "failed": 0}
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
+        self.precedence = {"rating": 0, "passed": 0, "failed": 0}
+        self.might = {"rating": 3, "passed": 0, "failed": 0}
         self.persona = 0
         self.fate = 0
         self.skills = {
             skill: {"rating": 0, "passed": 0, "failed": 0} for skill in skills.keys()
         }
+        self.wises = {}
         self.traits = {trait: 0 for trait in traits.keys()}
         stock_to_nature_dict = {
             "Dwarf": "Delving, Crafting, Avenging Grudges",
@@ -47,7 +50,14 @@ class Character:
             "sick": False,
             "dead": False,
         }
+        self.friends = []
+        self.enemies = []
+        self.inventory = {}
+        self.weapon = ""
+
+    def __str__(self):
+        return f"""{self.name} is a level {self.level} {self.stock} {self.class_}.
+        Current conditions are: {" and ".join([cond for cond in self.conditions.keys() if self.conditions[cond]])}."""
 
     def __repr__(self):
-        return f"""{self.name} is a level {self.level} {self.class_}.
-        Current conditions are: {" and ".join([cond for cond in self.conditions.keys() if self.conditions[cond]])}."""
+        return f'Character("{self.name}", "{self.class_}")'
