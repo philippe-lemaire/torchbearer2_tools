@@ -20,11 +20,13 @@ class Character:
         self.creed = ""
         self.instinct = ""
         self.goal = ""
-        self.will = 0
-        self.health = 0
+        self.will = {"rating": 0, "passed": 0, "failed": 0}
+        self.health = {"rating": 0, "passed": 0, "failed": 0}
         self.persona = 0
         self.fate = 0
-        self.skills = {skill: 0 for skill in skills.keys()}
+        self.skills = {
+            skill: {"rating": 0, "passed": 0, "failed": 0} for skill in skills.keys()
+        }
         self.traits = {trait: 0 for trait in traits.keys()}
         stock_to_nature_dict = {
             "Dwarf": "Delving, Crafting, Avenging Grudges",
