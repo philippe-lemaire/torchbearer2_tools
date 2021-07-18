@@ -1,3 +1,7 @@
+from torchbearer2_tools.skills import skills
+import numpy as np
+
+
 class Character:
     def __init__(self, name, class_):
         self.name = name
@@ -18,6 +22,12 @@ class Character:
         self.goal = ""
         self.will = 0
         self.health = 0
+        self.persona = 0
+        self.fate = 0
+        self.skills = {
+            skill: rating
+            for skill, rating in zip(skills.keys(), np.zeros(len(skills.keys())))
+        }
         stock_to_nature_dict = {
             "Dwarf": "Delving, Crafting, Avenging Grudges",
             "Elf": "Singing, Remembering and Hiding",
