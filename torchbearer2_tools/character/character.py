@@ -1,4 +1,5 @@
 from torchbearer2_tools.character.skills import skills
+from torchbearer2_tools.character.traits import traits
 
 
 class Character:
@@ -24,6 +25,7 @@ class Character:
         self.persona = 0
         self.fate = 0
         self.skills = {skill: 0 for skill in skills.keys()}
+        self.traits = {trait: 0 for trait in traits.keys()}
         stock_to_nature_dict = {
             "Dwarf": "Delving, Crafting, Avenging Grudges",
             "Elf": "Singing, Remembering and Hiding",
