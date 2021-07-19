@@ -84,28 +84,71 @@ class Character:
             print("You overcame the obstacle")
         else:
             print("You fell short")
-            if (
-                len(
-                    [
-                        die
-                        for die in r.last_raw_result
-                        if die.value == 6 and not die.exploded
-                    ]
-                )
-                > 0
-                and self.fate > 0
-            ):
+            # first propose using Deeper Understanting
+            if self.fate > 0:
                 response = ""
                 while response not in ["Yes", "Y", "yes", "y", "No", "N", "no", "n"]:
-                    response = input("Do you want to spend Fate to reroll 6s?")
+                    response = input(
+                        f"Was this last roll related to one of your wises ({self.wises.keys()})?"
+                    )
                 if response in ["Yes", "Y", "yes", "y"]:
-                    self.fate -= 1
-                    raw_result, successes = r.reroll6()
-                print(f"Final result: {raw_result}, {successes} successes.")
-                if successes >= obstacle:
-                    print("You finally overcame the obstacle")
-                else:
-                    print("You still fall short")
-                    if without:
-                        print("Your nature is temporarily reduced by 1.")
-                        self.nature["current_rating"] -= 1
+                    go_for_it = ""
+                    while go_for_it not in [
+                        "Yes",
+                        "Y",
+                        "yes",
+                        "y",
+                        "No",
+                        "N",
+                        "no",
+                        "n",
+                    ]:
+                        go_for_it = input(
+                            f"Do you want to spend one of your {self.fate} Fate to reroll one wyrm?"
+                        )
+                    if go_for_it in ["Yes", "Y", "yes", "y"]:
+                        self.fate -= 1
+                        raw_result, successes = r.deeper_understanding()
+                    print(f"Result: {raw_result}, {successes} successes.")
+                    if successes >= obstacle:
+                        print("You overcame the obstacle")
+                    else:
+                        print("You fell short, again…")
+
+                        # using luck to reroll 6s at the cost of 1 fate point
+                        if (
+                            len(
+                                [
+                                    die
+                                    for die in r.last_raw_result
+                                    if die.value == 6 and not die.exploded
+                                ]
+                            )
+                            > 0
+                            and self.fate > 0
+                        ):
+                            response = ""
+                            while response not in [
+                                "Yes",
+                                "Y",
+                                "yes",
+                                "y",
+                                "No",
+                                "N",
+                                "no",
+                                "n",
+                            ]:
+                                response = input(
+                                    f"Do you want to spend of of your {self.fate} Fate to reroll 6s?"
+                                )
+                            if response in ["Yes", "Y", "yes", "y"]:
+                                self.fate -= 1
+                                raw_result, successes = r.reroll6()
+                            print(f"Final result: {raw_result}, {successes} successes.")
+                            if successes >= obstacle:
+                                print("You finally overcame the obstacle")
+                            else:
+                                print("You still fall short")
+                                if without:
+                                    print("Your nature is temporarily reduced by 1.")
+                                    self.nature["current_rating"] -= 1
