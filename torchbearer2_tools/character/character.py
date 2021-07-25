@@ -190,6 +190,58 @@ class Character:
                 self.skills[chosen_skill]["rating"] = 3
             else:
                 self.skills[chosen_skill]["rating"] += 1
+        # home
+        homes = {
+            "Elfhome (Elves only)": {
+                "skills": ["healer", "mentor", "pathfinder"],
+                "traits": ["Calm", "Quiet"],
+            },
+            "Dwarven Halls": {
+                "skills": ["armorer", "laborer", "stonemason"],
+                "traits": ["Cunning", "Fiery"],
+            },
+            "Religious Bastion": {
+                "skills": ["cartographer", "scholar", "theologian"],
+                "traits": ["Defender", "Scarred"],
+            },
+            "Bustling Metropolis": {
+                "skills": ["haggler", "sailor", "steward"],
+                "traits": ["Extravagant", "Jaded"],
+            },
+            "Wizard’s Tower": {
+                "skills": ["alchemist", "lore master", "sholar"],
+                "traits": ["Skeptical", "Thoughtful"],
+            },
+            "Remote Village": {
+                "skills": ["carpenter", "peasant", "weaver"],
+                "traits": ["Early Riser", "Rough Hands"],
+            },
+            "Busy Crossroads": {
+                "skills": ["cook", "haggler", "rider"],
+                "traits": ["Foolhardy", "Quick-Witted"],
+            },
+        }
+        self.home = pyip.inputMenu(
+            choices=list(homes.keys()),
+            lettered=True,
+            prompt="Please select your home…\n",
+        )
+        home_skill = pyip.inputMenu(
+            choices=homes[self.home]["skills"],
+            lettered=True,
+            prompt="What skill did you develop at home?\n",
+        )
+        if self.skills[home_skill]["rating"] == 0:
+            self.skills[home_skill]["rating"] = 2
+        elif self.skills[home_skill]["rating"] < 4:
+            self.skills[home_skill]["rating"] += 1
+
+        home_trait = pyip.inputMenu(
+            choices=homes[self.home]["traits"],
+            lettered=True,
+            prompt="What trait did you gain from home?\n",
+        )
+        self.traits[home_trait] += 1
 
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
