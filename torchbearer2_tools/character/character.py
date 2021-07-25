@@ -315,22 +315,23 @@ class Character:
             "descriptors": stock_to_nature_dict[self.stock],
         }
         ## nature questions
-        dwarf_q_1 = "When your kin are slain and their halls plundered, will you spend your blood avenging them? Or will you demand a blood price from the kin slayers and council your people to let sleeping dragons lie?\n"
-        dwarf_a_1 = [
-            "If you would take revenge at any cost, increase Nature by one.",
-            "If you would council your people to resist their blood lust, replace the Avenging Grudges descriptor with Negotiating.",
-        ]
-        dwarf_q_2 = "Would you plunge ever deeper into the bones of the earth looking for treasures untold? Or do you fear what you would uncover should you dig too deep?\n"
-        dwarf_a_2 = [
-            "If you dig ever deeper, increase your Nature by one.",
-            "If you fear what lies beneath, increase your Born of Earth and Stone trait to level 2.",
-        ]
-        dwarf_q_3 = "Do you yearn to spend your days crafting wondrous objects from silver and gold? Or do you prefer to spend gold, preferably other people’s?\n"
-        dwarf_a_3 = [
-            "If you were born to craft wondrous objects, increase your Nature by one.",
-            "If you yearn to spend gold, set your starting Resources to 1",
-        ]
+
         if self.stock == "Dwarf":
+            dwarf_q_1 = "When your kin are slain and their halls plundered, will you spend your blood avenging them? Or will you demand a blood price from the kin slayers and council your people to let sleeping dragons lie?\n"
+            dwarf_a_1 = [
+                "If you would take revenge at any cost, increase Nature by one.",
+                "If you would council your people to resist their blood lust, replace the Avenging Grudges descriptor with Negotiating.",
+            ]
+            dwarf_q_2 = "Would you plunge ever deeper into the bones of the earth looking for treasures untold? Or do you fear what you would uncover should you dig too deep?\n"
+            dwarf_a_2 = [
+                "If you dig ever deeper, increase your Nature by one.",
+                "If you fear what lies beneath, increase your Born of Earth and Stone trait to level 2.",
+            ]
+            dwarf_q_3 = "Do you yearn to spend your days crafting wondrous objects from silver and gold? Or do you prefer to spend gold, preferably other people’s?\n"
+            dwarf_a_3 = [
+                "If you were born to craft wondrous objects, increase your Nature by one.",
+                "If you yearn to spend gold, set your starting Resources to 1",
+            ]
             answer1 = pyip.inputMenu(prompt=dwarf_q_1, choices=dwarf_a_1, lettered=True)
             answer2 = pyip.inputMenu(prompt=dwarf_q_2, choices=dwarf_a_2, lettered=True)
             answer3 = pyip.inputMenu(prompt=dwarf_q_3, choices=dwarf_a_3, lettered=True)
@@ -348,23 +349,23 @@ class Character:
                 self.nature["max_rating"] += 1
             else:
                 self.resources["rating"] = 1
-        elf_q_1 = "Have you learned the songs of creation and do you sing them to mend hearts and calm storms? Or do you focus your ancient will into crafting works of unparalleled beauty?\n"
-        elf_a_1 = [
-            "If you sing the ancient songs, increase your Nature by one.",
-            "If you bend your will to crafting Elven artifacts, replace your Singing Nature descriptor with Enchanting.",
-        ]
-        elf_q_2 = "When evil stalks the world, do you confront it? Or do you retreat to the hidden places of the elves and allow time to defeat your enemies?\n"
-        elf_a_2 = [
-            "If you confront evil, increase your First Born trait to level 2.",
-            "If you retreat and hide, increase your Nature by one.",
-        ]
-        elf_q_3 = "Do you yearn to follow the gulls to the sea and journey west beyond all knowledge? Or are you prepared to live a life of struggle and grief?\n"
-        elf_a_3 = [
-            "If you yearn to journey west, increase your Nature by one.",
-            "If you are prepared to live a life of struggle, you may replace your home trait with Fiery, Curious or Restless. If you have one of these traits already, increase it by one.",
-        ]
 
         if self.stock == "Elf":
+            elf_q_1 = "Have you learned the songs of creation and do you sing them to mend hearts and calm storms? Or do you focus your ancient will into crafting works of unparalleled beauty?\n"
+            elf_a_1 = [
+                "If you sing the ancient songs, increase your Nature by one.",
+                "If you bend your will to crafting Elven artifacts, replace your Singing Nature descriptor with Enchanting.",
+            ]
+            elf_q_2 = "When evil stalks the world, do you confront it? Or do you retreat to the hidden places of the elves and allow time to defeat your enemies?\n"
+            elf_a_2 = [
+                "If you confront evil, increase your First Born trait to level 2.",
+                "If you retreat and hide, increase your Nature by one.",
+            ]
+            elf_q_3 = "Do you yearn to follow the gulls to the sea and journey west beyond all knowledge? Or are you prepared to live a life of struggle and grief?\n"
+            elf_a_3 = [
+                "If you yearn to journey west, increase your Nature by one.",
+                "If you are prepared to live a life of struggle, you may replace your home trait with Fiery, Curious or Restless. If you have one of these traits already, increase it by one.",
+            ]
             answer1 = pyip.inputMenu(prompt=elf_q_1, choices=elf_a_1, lettered=True)
             answer2 = pyip.inputMenu(prompt=elf_q_2, choices=elf_a_2, lettered=True)
             answer3 = pyip.inputMenu(prompt=elf_q_3, choices=elf_a_3, lettered=True)
