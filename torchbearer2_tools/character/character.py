@@ -155,6 +155,22 @@ class Character:
 
         # level
         self.level = 1
+
+        # traits
+        self.traits = {trait: 0 for trait in traits.keys()}
+        traits_per_class = {
+            "Burglar": "Hidden Depths",
+            "Magician": "Wizard’s Sight",
+            "Outcast": "Born of Earth and Stone",
+            "Ranger": "First Born",
+            "Theurge": "Touched by the Gods",
+            "Warrior": "Heart of Battle",
+            "Shaman": "Between Two Worlds",
+            "Skald": "Voice of Thunder",
+            "Thief": "Devil May Care",
+        }
+        self.traits[traits_per_class[self.class_]] = 1
+
         # upbringing (humans only)
         if self.stock == "Human":
             pass
@@ -167,7 +183,6 @@ class Character:
         self.fate = 0
 
         self.wises = {}
-        self.traits = {trait: 0 for trait in traits.keys()}
 
         self.conditions = {
             "fresh": True,
