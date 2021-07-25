@@ -36,17 +36,7 @@ class Character:
             "Thief": "Human",
         }
         self.stock = class_to_stock_dict[self.class_]
-        stock_to_nature_dict = {
-            "Dwarf": ["Delving", "Crafting", "Avenging Grudges"],
-            "Elf": ["Singing", "Remembering", "Hiding"],
-            "Halfling": ["Sneaking", "Riddling", "Merrymaking"],
-            "Human": ["Boasting", "Demanding", "Running"],
-        }
-        self.nature = {
-            "current_rating": 3,
-            "max_rating": 3,
-            "descriptors": stock_to_nature_dict[self.stock],
-        }
+
         # skills
         class_skills = {
             "Burglar": (
@@ -311,6 +301,46 @@ class Character:
         )
         self.wises.append(f"{extra_wise}-wise")
 
+        # nature
+        stock_to_nature_dict = {
+            "Dwarf": ["Delving", "Crafting", "Avenging Grudges"],
+            "Elf": ["Singing", "Remembering", "Hiding"],
+            "Halfling": ["Sneaking", "Riddling", "Merrymaking"],
+            "Human": ["Boasting", "Demanding", "Running"],
+        }
+        self.nature = {
+            "current_rating": 0,
+            "max_rating": 3,
+            "descriptors": stock_to_nature_dict[self.stock],
+        }
+        ## nature questions
+        dwarf_q_1 = "When your kin are slain and their halls plundered, will you spend your blood avenging them? Or will you demand a blood price from the kin slayers and council your people to let sleeping dragons lie?\n"
+        dwarf_a_1 = [
+            "If you would take revenge at any cost, increase Nature by one.",
+            "If you would council your people to resist their blood lust, replace the Avenging Grudges descriptor with Negotiating.",
+        ]
+        dwarf_q_2 = "Would you plunge ever deeper into the bones of the earth looking for treasures untold? Or do you fear what you would uncover should you dig too deep?\n"
+        dwarf_a_2 = [
+            "If you dig ever deeper, increase your Nature by one.",
+            "If you fear what lies beneath, increase your Born of Earth andStone trait to level 2.",
+        ]
+        dwarf_q_3 = "Do you yearn to spend your days crafting wondrous objects from silver and gold? Or do you prefer to spend gold, preferably other people’s?\n"
+        dwarf_a_3 = [
+            "If you were born to craft wondrous objects, increase your Nature by one.",
+            "If you yearn to spend gold, set your starting Resources to 1",
+        ]
+        if self.stock == "Dwarf":
+            answer1 = pyip.inputMenu(prompt=dwarf_q_1, choices=dwarf_a_1, lettered=True)
+            answer2 = pyip.inputMenu(prompt=dwarf_q_2, choices=dwarf_a_2, lettered=True)
+            answer3 = pyip.inputMenu(prompt=dwarf_q_3, choices=dwarf_a_3, lettered=True)
+            if answer1 == dwarf_a_1[0]:
+                self.nature["max_rating"] += 1
+            else:
+                self.nature["descriptors"] = self.nature["descriptors"][:2] + [
+                    "Negociating"
+                ]
+
+        self.nature["current_rating"] = self.nature["max_rating"]
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
         self.precedence = 3
