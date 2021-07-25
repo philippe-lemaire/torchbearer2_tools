@@ -256,6 +256,8 @@ class Character:
             self.skills[social_grace]["rating"] = 2
         elif self.skills[social_grace]["rating"] < 4:
             self.skills[social_grace]["rating"] += 1
+        else:
+            print("Skill already at a rating of 4, too bad…")
 
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
