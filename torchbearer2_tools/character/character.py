@@ -290,12 +290,13 @@ class Character:
             ],
             "Halfling": ["Home-wise", "Needs a Little Salt-wise"],
         }
-        selected_wise = pyip.inputMenu(
-            choices=wises_per_stock[self.stock],
-            prompt="How are you wise?\n",
-            lettered=True,
-        )
-        self.wises.append(selected_wise)
+        if self.stock != "Human":
+            selected_wise = pyip.inputMenu(
+                choices=wises_per_stock[self.stock],
+                prompt="How are you wise?\n",
+                lettered=True,
+            )
+            self.wises.append(selected_wise)
         extra_wise = input(
             prompt="How are you wise?\nChoose a specific domain of wisdom, like a specific town, monster, thing or people."
         )
@@ -418,9 +419,9 @@ class Character:
             if answer1 == halfling_a_1[0]:
                 self.nature["max_rating"] += 1
             else:
-                self.nature["descriptors"] = self.nature["descriptors"][:2] + [
-                    "Hoarding"
-                ]
+                self.nature["descriptors"].remove("Merrymaking")
+                self.nature["descriptors"].append("Hoarding")
+
             if answer2 == halfling_a_2[0]:
                 self.nature["max_rating"] += 1
             else:
@@ -428,8 +429,59 @@ class Character:
             if answer3 == halfling_a_3[0]:
                 self.nature["max_rating"] += 1
             else:
-                self.nature["descriptons"].remove("Sneacking")
+                self.nature["descriptors"].remove("Sneaking")
                 self.nature["descriptors"].append("Demanding")
+
+        if self.stock == "Human":
+            human_q_1 = "Do you sit by the hearth at night drinking and boasting of your great deeds? Or do you spend those chill nights quietly preparing for the dark times to come?\n"
+            human_a_1 = [
+                "If you boast of your exploits, real or imagined, increase your Nature by one.",
+                f"If you quietly prepare, increase your class trait ({traits_per_class[self.class_]}) to level 2.",
+            ]
+            human_q_2 = "When the elves and dwarves voice their concerns, do you demand to be heard as an equal? Or do you bow your head and listen to the wisdom of your elders?\n"
+            human_a_2 = [
+                "If you demand your rights, increase Nature by one.",
+                "If you listen to the wisdom of the elder ones, take a second wise: Elf-wise, Dwarf-wise or Politics-wise.",
+            ]
+            human_q_3 = "Would you flee from the hordes of goblins, beasts and monsters who prey on civilization? Or will you plunge into their midst, questing for glory?\n"
+            human_a_3 = [
+                "If you would flee and hide inside the walls of tall citadels, increase your Nature by one.",
+                "If you do not fear those who prey on civilization, you may replace your home trait with Loner, Foolhardy or Defender. If you have one of these traits already, increase it by one.",
+            ]
+            answer1 = pyip.inputMenu(prompt=human_q_1, choices=human_a_1, lettered=True)
+            answer2 = pyip.inputMenu(prompt=human_q_2, choices=human_a_2, lettered=True)
+            answer3 = pyip.inputMenu(prompt=human_q_3, choices=human_a_3, lettered=True)
+            if answer1 == human_a_1[0]:
+                self.nature["max_rating"] += 1
+            else:
+                # increase class_trait to level 2
+                self.traits[traits_per_class[self.class_]] = 2
+            if answer2 == human_a_2[0]:
+                self.nature["max_rating"] += 1
+            else:
+                new_wise_options = ["Elf-wise", "Dwarf-wise", "Politics-wise"]
+                new_wise_selected = pyip.inputMenu(
+                    choices=new_wise_options,
+                    prompt="Pick an extra wise…\n",
+                    lettered=True,
+                )
+                self.wises.append(new_wise_selected)
+            if answer3 == human_a_3[0]:
+                self.nature["max_rating"] += 1
+            else:
+                new_traits_options = ["Loner", "Foolhardy", "Defender"]
+                change_trait = pyip.inputYesNo(
+                    prompt=f"Do you want to replace your home trait {home_trait} by one of the following: {', '.join(new_traits_options)}?",
+                )
+                if change_trait == "yes":
+                    new_trait = pyip.inputMenu(
+                        choices=new_traits_options,
+                        prompt="Pick a new trait to replace your home trait…\n" "",
+                        lettered=True,
+                    )
+                    self.traits[home_trait] -= 1
+                    self.traits[new_trait] += 1
+
         # set nature's current rating after the questions
         self.nature["current_rating"] = self.nature["max_rating"]
 
