@@ -4,9 +4,31 @@ from torchbearer2_tools.roller import Roller
 
 
 class Character:
-    def __init__(self, name, class_):
+    def __init__(self, name):
+        # Name
         self.name = name
-        self.class_ = class_
+        # Class and stock
+        classes = [
+            "Burglar",
+            "Magician",
+            "Outcast",
+            "Ranger",
+            "Theurge",
+            "Warrior",
+            "Shaman",
+            "Skald",
+            "Thief",
+        ]
+        self.class_ = ""
+        while self.class_ not in classes:
+            self.class_ = input(
+                f"""Choose a class among:
+                                - {'''
+                                - '''.join(classes)}
+                                
+                                """
+            )
+
         class_to_stock_dict = {
             "Burglar": "Halfling",
             "Magician": "Human",
@@ -14,26 +36,11 @@ class Character:
             "Ranger": "Elf",
             "Theurge": "Human",
             "Warrior": "Human",
+            "Shaman": "Human",
+            "Skald": "Human",
+            "Thief": "Human",
         }
         self.stock = class_to_stock_dict[self.class_]
-        self.level = 1
-        self.belief = ""
-        self.creed = ""
-        self.instinct = ""
-        self.goal = ""
-        self.will = {"rating": 0, "passed": 0, "failed": 0}
-        self.health = {"rating": 0, "passed": 0, "failed": 0}
-        self.resources = {"rating": 0, "passed": 0, "failed": 0}
-        self.circles = {"rating": 0, "passed": 0, "failed": 0}
-        self.precedence = {"rating": 0, "passed": 0, "failed": 0}
-        self.might = {"rating": 3, "passed": 0, "failed": 0}
-        self.persona = 0
-        self.fate = 0
-        self.skills = {
-            skill: {"rating": 0, "passed": 0, "failed": 0} for skill in skills.keys()
-        }
-        self.wises = {}
-        self.traits = {trait: 0 for trait in traits.keys()}
         stock_to_nature_dict = {
             "Dwarf": ["Delving", "Crafting", "Avenging Grudges"],
             "Elf": ["Singing", "Remembering", "Hiding"],
@@ -45,6 +52,98 @@ class Character:
             "max_rating": 3,
             "descriptors": stock_to_nature_dict[self.stock],
         }
+        # skills
+        class_skills = {
+            "Burglar": (
+                ("cook", 3),
+                ("criminal", 3),
+                ("fighter", 3),
+                ("hunter", 2),
+                ("scout", 2),
+                ("scavenger", 2),
+            ),
+            "Magician": (
+                ("arcanist", 4),
+                ("lore master", 3),
+                ("alchemist", 2),
+                ("cartographer", 2),
+                ("scholar", 2),
+            ),
+            "Outcast": (
+                ("fighter", 4),
+                ("dungeoneer", 3),
+                ("armorer", 2),
+                ("sapper", 2),
+                ("orator", 2),
+                ("scout", 2),
+            ),
+            "Ranger": (
+                ("fighter", 3),
+                ("pathfinder", 3),
+                ("scout", 3),
+                ("hunter", 2),
+                ("lore master", 2),
+                ("survivatist", 2),
+            ),
+            "Theurge": (
+                ("fighter", 3),
+                ("ritualist", 3),
+                ("orator", 3),
+                ("healer", 2),
+                ("theologian", 2),
+            ),
+            "Warrior": (
+                ("fighter", 4),
+                ("hunter", 3),
+                ("commander", 2),
+                ("mentor", 2),
+                ("rider", 2),
+            ),
+            "Shaman": (
+                ("ritualist", 4),
+                ("theologian", 3),
+                ("fighter", 2),
+                ("healer", 2),
+                ("scavenger", 2),
+            ),
+            "Thief": (
+                ("criminal", 3),
+                ("manipulator", 3),
+                ("scout", 3),
+                ("sapper", 2),
+                ("fighter", 2),
+            ),
+            "Skald": (
+                ("orator", 4),
+                ("manipulator", 3),
+                ("fighter", 2),
+                ("lore master", 2),
+                ("scholar", 2),
+            ),
+        }
+        self.skills = {
+            skill: {"rating": 0, "passed": 0, "failed": 0} for skill in skills.keys()
+        }
+        for skill, rating in class_skills[self.class_]:
+            self.skills[skill]["rating"] = rating
+
+        # level
+        self.level = 1
+        # upbringing (humans only)
+        if self.stock == "Human":
+            pass
+        self.will = {"rating": 0, "passed": 0, "failed": 0}
+        self.health = {"rating": 0, "passed": 0, "failed": 0}
+        self.resources = {"rating": 0, "passed": 0, "failed": 0}
+        self.circles = {"rating": 0, "passed": 0, "failed": 0}
+        self.precedence = {"rating": 0, "passed": 0, "failed": 0}
+        self.might = {"rating": 3, "passed": 0, "failed": 0}
+        self.persona = 0
+        self.fate = 0
+
+        self.wises = {}
+        self.traits = {trait: 0 for trait in traits.keys()}
+
         self.conditions = {
             "fresh": True,
             "hungry_and_thirsty": False,
@@ -59,6 +158,10 @@ class Character:
         self.enemies = []
         self.inventory = {}
         self.weapon = ""
+        self.belief = ""
+        self.creed = ""
+        self.instinct = ""
+        self.goal = ""
 
     def __str__(self):
         return f"""{self.name} is a level {self.level} {self.stock} {self.class_}.
