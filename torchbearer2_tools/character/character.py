@@ -173,7 +173,23 @@ class Character:
 
         # upbringing (humans only)
         if self.stock == "Human":
-            pass
+            upbringing_skills = [
+                "criminal",
+                "laborer",
+                "pathfinder",
+                "haggler",
+                "peasant",
+                "survivalist",
+            ]
+            chosen_skill = pyip.inputMenu(
+                choices=upbringing_skills,
+                lettered=True,
+                prompt="Select a skill given or improved by your upbringing…\n",
+            )
+            if self.skills[chosen_skill]["rating"] == 0:
+                self.skills[chosen_skill]["rating"] = 3
+            else:
+                self.skills[chosen_skill]["rating"] += 1
 
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
