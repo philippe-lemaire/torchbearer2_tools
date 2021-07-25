@@ -259,14 +259,64 @@ class Character:
         else:
             print("Skill already at a rating of 4, too bad…")
 
+        # Specialty
+        specialty_options = [
+            "cartographer",
+            "cook",
+            "criminal",
+            "dungeoneer",
+            "haggler",
+            "healer",
+            "hunter",
+            "manipulator",
+            "pathfinder",
+            "persuader",
+            "orator",
+            "rider",
+            "sapper",
+            "scavenger",
+            "scout",
+            "survivalist",
+        ]
+        specialty = pyip.inputMenu(
+            choices=specialty_options, lettered=True, prompt="What’s your specialty?\n"
+        )
+        if self.skills[specialty]["rating"] == 0:
+            self.skills[specialty]["rating"] = 2
+        elif self.skills[specialty]["rating"] < 4:
+            self.skills[specialty]["rating"] += 1
+        else:
+            print("Skill already at a rating of 4, too bad…")
+
+        # wises
+
+        self.wises = []
+        wises_per_stock = {
+            "Dwarf": ["Dwarven Chronicles-wise", "Shrewd Appraisal-wise"],
+            "Elf": [
+                "Elven Lore-wise",
+                "Folly of Humanity-wise",
+                "Folly of Dwarves-wise",
+            ],
+            "Halfling": ["Home-wise", "Needs a Little Salt-wise"],
+        }
+        selected_wise = pyip.inputMenu(
+            choices=wises_per_stock[self.stock],
+            prompt="How are you wise?\n",
+            lettered=True,
+        )
+        self.wises.append(selected_wise)
+        extra_wise = input(
+            prompt="How are you wise?\nChoose a specific domain of wisdom, like a specific town, monster, thing or people."
+        )
+        self.wises.append(f"{extra_wise}-wise")
+
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
-        self.precedence = {"rating": 0, "passed": 0, "failed": 0}
-        self.might = {"rating": 3, "passed": 0, "failed": 0}
+        self.precedence = 3
+        self.might = 3
         self.persona = 0
         self.fate = 0
-
-        self.wises = {}
 
         self.conditions = {
             "fresh": True,
