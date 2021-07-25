@@ -390,6 +390,47 @@ class Character:
                 )
                 self.traits[new_trait] += 1
 
+        if self.stock == "Halfling":
+            halfling_q_1 = "Do you make the most out of every meal, slathering it with butter, lavishing it with syrup, worshipping it with wine? Or do you tighten your belt, shoo away guests and make fast the locks at night?\n"
+            halfling_a_1 = [
+                "If you make the most out of each meal, increase your Nature by one.",
+                "If you tighten your belt with a grim face, replace your Merry-making descriptor with Hoarding.",
+            ]
+            halfling_q_2 = "When confronted by bullying big folk, do you put them in their place with a witty riddle? Or do you roll up your sleeves and showthem you’re ready to teach them a lesson?\n"
+            halfling_a_2 = [
+                "If you offer up a clever riddle, increase your Nature by one.",
+                "If you roll up your sleeves, increase your Hidden Depths trait to level 2.",
+            ]
+            halfling_q_3 = "Do you sneak into dragons’ lairs just to see what all the fuss is about? Or do you prefer to announce your intentions and have a frank conversation about your concerns?\n"
+            halfling_a_3 = [
+                "If you sneak into dragons’ lairs, increase your Nature by one.",
+                "If you announce your intentions to have a frank discussion, replace your Sneaking Nature descriptor with Demanding.",
+            ]
+            answer1 = pyip.inputMenu(
+                prompt=halfling_q_1, choices=halfling_a_1, lettered=True
+            )
+            answer2 = pyip.inputMenu(
+                prompt=halfling_q_2, choices=halfling_a_2, lettered=True
+            )
+            answer3 = pyip.inputMenu(
+                prompt=halfling_q_3, choices=halfling_a_3, lettered=True
+            )
+            if answer1 == halfling_a_1[0]:
+                self.nature["max_rating"] += 1
+            else:
+                self.nature["descriptors"] = self.nature["descriptors"][:2] + [
+                    "Hoarding"
+                ]
+            if answer2 == halfling_a_2[0]:
+                self.nature["max_rating"] += 1
+            else:
+                self.traits["Hidden Depths"] = 2
+            if answer3 == halfling_a_3[0]:
+                self.nature["max_rating"] += 1
+            else:
+                self.nature["descriptons"].remove("Sneacking")
+                self.nature["descriptors"].append("Demanding")
+        # set nature's current rating after the questions
         self.nature["current_rating"] = self.nature["max_rating"]
 
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
