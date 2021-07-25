@@ -235,6 +235,8 @@ class Character:
             self.skills[home_skill]["rating"] = 2
         elif self.skills[home_skill]["rating"] < 4:
             self.skills[home_skill]["rating"] += 1
+        else:
+            print("Skill already at a rating of 4, too bad…")
 
         home_trait = pyip.inputMenu(
             choices=homes[self.home]["traits"],
@@ -242,6 +244,18 @@ class Character:
             prompt="What trait did you gain from home?\n",
         )
         self.traits[home_trait] += 1
+
+        # social graces
+        social_skills = ["haggler", "manipulator", "orator", "persuader"]
+        social_grace = pyip.inputMenu(
+            choices=social_skills,
+            lettered=True,
+            prompt="How do you convince people that you’re right or to do what you need?\n",
+        )
+        if self.skills[social_grace]["rating"] == 0:
+            self.skills[social_grace]["rating"] = 2
+        elif self.skills[social_grace]["rating"] < 4:
+            self.skills[social_grace]["rating"] += 1
 
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
