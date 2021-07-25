@@ -1,6 +1,7 @@
 from torchbearer2_tools.character.skills import skills
 from torchbearer2_tools.character.traits import traits
 from torchbearer2_tools.roller import Roller
+import pyinputplus as pyip
 
 
 class Character:
@@ -19,15 +20,9 @@ class Character:
             "Skald",
             "Thief",
         ]
-        self.class_ = ""
-        while self.class_ not in classes:
-            self.class_ = input(
-                f"""Choose a class among:
-                                - {'''
-                                - '''.join(classes)}
-                                
-                                """
-            )
+        self.class_ = pyip.inputMenu(
+            choices=classes, lettered=True, prompt="Select your class…\n"
+        )
 
         class_to_stock_dict = {
             "Burglar": "Halfling",
@@ -83,7 +78,7 @@ class Character:
                 ("scout", 3),
                 ("hunter", 2),
                 ("lore master", 2),
-                ("survivatist", 2),
+                ("survivalist", 2),
             ),
             "Theurge": (
                 ("fighter", 3),
@@ -127,13 +122,43 @@ class Character:
         for skill, rating in class_skills[self.class_]:
             self.skills[skill]["rating"] = rating
 
+        # abilities
+        will_health_options = [
+            "will: 6, health: 2",
+            "will: 5, health: 3",
+            "will: 4, health: 4",
+            "will: 3, health: 5",
+            "will: 2, health: 6",
+        ]
+        self.will = {"rating": 0, "passed": 0, "failed": 0}
+        self.health = {"rating": 0, "passed": 0, "failed": 0}
+        abilities_per_class_options = {
+            "Burglar": [will_health_options[1]],
+            "Magician": will_health_options,
+            "Outcast": [will_health_options[3]],
+            "Ranger": [will_health_options[2]],
+            "Theurge": will_health_options,
+            "Warrior": will_health_options,
+            "Shaman": will_health_options,
+            "Skald": will_health_options,
+            "Thief": will_health_options,
+        }
+
+        selection = pyip.inputMenu(
+            choices=abilities_per_class_options[self.class_],
+            prompt="Pick your abilities…\n",
+            blank=True,
+            lettered=True,
+        )
+
+        self.will, self.health = int(selection[6]), int(selection[-1])
+
         # level
         self.level = 1
         # upbringing (humans only)
         if self.stock == "Human":
             pass
-        self.will = {"rating": 0, "passed": 0, "failed": 0}
-        self.health = {"rating": 0, "passed": 0, "failed": 0}
+
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
         self.precedence = {"rating": 0, "passed": 0, "failed": 0}
