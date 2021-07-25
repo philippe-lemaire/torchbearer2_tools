@@ -302,6 +302,7 @@ class Character:
         self.wises.append(f"{extra_wise}-wise")
 
         # nature
+        self.resources = {"rating": 0, "passed": 0, "failed": 0}
         stock_to_nature_dict = {
             "Dwarf": ["Delving", "Crafting", "Avenging Grudges"],
             "Elf": ["Singing", "Remembering", "Hiding"],
@@ -322,7 +323,7 @@ class Character:
         dwarf_q_2 = "Would you plunge ever deeper into the bones of the earth looking for treasures untold? Or do you fear what you would uncover should you dig too deep?\n"
         dwarf_a_2 = [
             "If you dig ever deeper, increase your Nature by one.",
-            "If you fear what lies beneath, increase your Born of Earth andStone trait to level 2.",
+            "If you fear what lies beneath, increase your Born of Earth and Stone trait to level 2.",
         ]
         dwarf_q_3 = "Do you yearn to spend your days crafting wondrous objects from silver and gold? Or do you prefer to spend gold, preferably other people’s?\n"
         dwarf_a_3 = [
@@ -339,9 +340,57 @@ class Character:
                 self.nature["descriptors"] = self.nature["descriptors"][:2] + [
                     "Negociating"
                 ]
+            if answer2 == dwarf_a_2[0]:
+                self.nature["max_rating"] += 1
+            else:
+                self.traits["Born of Earth and Stone"] = 2
+            if answer3 == dwarf_a_3[0]:
+                self.nature["max_rating"] += 1
+            else:
+                self.resources["rating"] = 1
+        elf_q_1 = "Have you learned the songs of creation and do you sing them to mend hearts and calm storms? Or do you focus your ancient will into crafting works of unparalleled beauty?\n"
+        elf_a_1 = [
+            "If you sing the ancient songs, increase your Nature by one.",
+            "If you bend your will to crafting Elven artifacts, replace your Singing Nature descriptor with Enchanting.",
+        ]
+        elf_q_2 = "When evil stalks the world, do you confront it? Or do you retreat to the hidden places of the elves and allow time to defeat your enemies?\n"
+        elf_a_2 = [
+            "If you confront evil, increase your First Born trait to level 2.",
+            "If you retreat and hide, increase your Nature by one.",
+        ]
+        elf_q_3 = "Do you yearn to follow the gulls to the sea and journey west beyond all knowledge? Or are you prepared to live a life of struggle and grief?\n"
+        elf_a_3 = [
+            "If you yearn to journey west, increase your Nature by one.",
+            "If you are prepared to live a life of struggle, you may replace your home trait with Fiery, Curious or Restless. If you have one of these traits already, increase it by one.",
+        ]
+
+        if self.stock == "Elf":
+            answer1 = pyip.inputMenu(prompt=elf_q_1, choices=elf_a_1, lettered=True)
+            answer2 = pyip.inputMenu(prompt=elf_q_2, choices=elf_a_2, lettered=True)
+            answer3 = pyip.inputMenu(prompt=elf_q_3, choices=elf_a_3, lettered=True)
+            if answer1 == elf_a_1[0]:
+                self.nature["max_rating"] += 1
+            else:
+                self.nature["descriptors"] = self.nature["descriptors"][1:] + [
+                    "Enchanting"
+                ]
+            if answer2 == elf_a_2[1]:
+                self.nature["max_rating"] += 1
+            else:
+                self.traits["First Born"] = 2
+            if answer3 == elf_a_3[0]:
+                self.nature["max_rating"] += 1
+            else:
+                self.traits[home_trait] = 0
+                new_trait = pyip.inputMenu(
+                    choices=["Fiery", "Curious", "Restless"],
+                    lettered=True,
+                    prompt="Select a trait to get or increase…\n",
+                )
+                self.traits[new_trait] += 1
 
         self.nature["current_rating"] = self.nature["max_rating"]
-        self.resources = {"rating": 0, "passed": 0, "failed": 0}
+
         self.circles = {"rating": 0, "passed": 0, "failed": 0}
         self.precedence = 3
         self.might = 3
