@@ -8,6 +8,17 @@ class Character:
     def __init__(self, name):
         # Name
         self.name = name
+        # inventory
+        self.inventory = {
+            "head": "",
+            "neck": "",
+            "hands_worn": {"slot1": "", "slot2": ""},
+            "hands_carried": {"slot1": "", "slot2": ""},
+            "feet": "",
+            "torso": {"slot1": "", "slot2": "", "slot3": ""},
+            "belt": {"slot1": "", "slot2": "", "slot3": ""},
+            "pocket": "",
+        }
         # Class and stock
         classes = [
             "Burglar",
@@ -303,6 +314,7 @@ class Character:
         self.wises.append(f"{extra_wise}-wise")
 
         # nature
+        print("\n\nLet’s set your nature\n\n")
         self.resources = {"rating": 0, "passed": 0, "failed": 0}
         stock_to_nature_dict = {
             "Dwarf": ["Delving", "Crafting", "Avenging Grudges"],
@@ -318,17 +330,17 @@ class Character:
         ## nature questions
 
         if self.stock == "Dwarf":
-            dwarf_q_1 = "When your kin are slain and their halls plundered, will you spend your blood avenging them? Or will you demand a blood price from the kin slayers and council your people to let sleeping dragons lie?\n"
+            dwarf_q_1 = "\nWhen your kin are slain and their halls plundered, will you spend your blood avenging them? Or will you demand a blood price from the kin slayers and council your people to let sleeping dragons lie?\n"
             dwarf_a_1 = [
                 "If you would take revenge at any cost, increase Nature by one.",
                 "If you would council your people to resist their blood lust, replace the Avenging Grudges descriptor with Negotiating.",
             ]
-            dwarf_q_2 = "Would you plunge ever deeper into the bones of the earth looking for treasures untold? Or do you fear what you would uncover should you dig too deep?\n"
+            dwarf_q_2 = "\nWould you plunge ever deeper into the bones of the earth looking for treasures untold? Or do you fear what you would uncover should you dig too deep?\n"
             dwarf_a_2 = [
                 "If you dig ever deeper, increase your Nature by one.",
                 "If you fear what lies beneath, increase your Born of Earth and Stone trait to level 2.",
             ]
-            dwarf_q_3 = "Do you yearn to spend your days crafting wondrous objects from silver and gold? Or do you prefer to spend gold, preferably other people’s?\n"
+            dwarf_q_3 = "\nDo you yearn to spend your days crafting wondrous objects from silver and gold? Or do you prefer to spend gold, preferably other people’s?\n"
             dwarf_a_3 = [
                 "If you were born to craft wondrous objects, increase your Nature by one.",
                 "If you yearn to spend gold, set your starting Resources to 1",
@@ -352,17 +364,17 @@ class Character:
                 self.resources["rating"] = 1
 
         if self.stock == "Elf":
-            elf_q_1 = "Have you learned the songs of creation and do you sing them to mend hearts and calm storms? Or do you focus your ancient will into crafting works of unparalleled beauty?\n"
+            elf_q_1 = "\nHave you learned the songs of creation and do you sing them to mend hearts and calm storms? Or do you focus your ancient will into crafting works of unparalleled beauty?\n"
             elf_a_1 = [
                 "If you sing the ancient songs, increase your Nature by one.",
                 "If you bend your will to crafting Elven artifacts, replace your Singing Nature descriptor with Enchanting.",
             ]
-            elf_q_2 = "When evil stalks the world, do you confront it? Or do you retreat to the hidden places of the elves and allow time to defeat your enemies?\n"
+            elf_q_2 = "\nWhen evil stalks the world, do you confront it? Or do you retreat to the hidden places of the elves and allow time to defeat your enemies?\n"
             elf_a_2 = [
                 "If you confront evil, increase your First Born trait to level 2.",
                 "If you retreat and hide, increase your Nature by one.",
             ]
-            elf_q_3 = "Do you yearn to follow the gulls to the sea and journey west beyond all knowledge? Or are you prepared to live a life of struggle and grief?\n"
+            elf_q_3 = "\nDo you yearn to follow the gulls to the sea and journey west beyond all knowledge? Or are you prepared to live a life of struggle and grief?\n"
             elf_a_3 = [
                 "If you yearn to journey west, increase your Nature by one.",
                 "If you are prepared to live a life of struggle, you may replace your home trait with Fiery, Curious or Restless. If you have one of these traits already, increase it by one.",
@@ -392,17 +404,17 @@ class Character:
                 self.traits[new_trait] += 1
 
         if self.stock == "Halfling":
-            halfling_q_1 = "Do you make the most out of every meal, slathering it with butter, lavishing it with syrup, worshipping it with wine? Or do you tighten your belt, shoo away guests and make fast the locks at night?\n"
+            halfling_q_1 = "\nDo you make the most out of every meal, slathering it with butter, lavishing it with syrup, worshipping it with wine? Or do you tighten your belt, shoo away guests and make fast the locks at night?\n"
             halfling_a_1 = [
                 "If you make the most out of each meal, increase your Nature by one.",
                 "If you tighten your belt with a grim face, replace your Merry-making descriptor with Hoarding.",
             ]
-            halfling_q_2 = "When confronted by bullying big folk, do you put them in their place with a witty riddle? Or do you roll up your sleeves and showthem you’re ready to teach them a lesson?\n"
+            halfling_q_2 = "\nWhen confronted by bullying big folk, do you put them in their place with a witty riddle? Or do you roll up your sleeves and showthem you’re ready to teach them a lesson?\n"
             halfling_a_2 = [
                 "If you offer up a clever riddle, increase your Nature by one.",
                 "If you roll up your sleeves, increase your Hidden Depths trait to level 2.",
             ]
-            halfling_q_3 = "Do you sneak into dragons’ lairs just to see what all the fuss is about? Or do you prefer to announce your intentions and have a frank conversation about your concerns?\n"
+            halfling_q_3 = "\nDo you sneak into dragons’ lairs just to see what all the fuss is about? Or do you prefer to announce your intentions and have a frank conversation about your concerns?\n"
             halfling_a_3 = [
                 "If you sneak into dragons’ lairs, increase your Nature by one.",
                 "If you announce your intentions to have a frank discussion, replace your Sneaking Nature descriptor with Demanding.",
@@ -433,29 +445,29 @@ class Character:
                 self.nature["descriptors"].append("Demanding")
 
         if self.stock == "Human":
-            human_q_1 = "Do you sit by the hearth at night drinking and boasting of your great deeds? Or do you spend those chill nights quietly preparing for the dark times to come?\n"
+            human_q_1 = "\nDo you sit by the hearth at night drinking and boasting of your great deeds? Or do you spend those chill nights quietly preparing for the dark times to come?\n"
             human_a_1 = [
                 "If you boast of your exploits, real or imagined, increase your Nature by one.",
                 f"If you quietly prepare, increase your class trait ({traits_per_class[self.class_]}) to level 2.",
             ]
-            human_q_2 = "When the elves and dwarves voice their concerns, do you demand to be heard as an equal? Or do you bow your head and listen to the wisdom of your elders?\n"
+            human_q_2 = "\nWhen the elves and dwarves voice their concerns, do you demand to be heard as an equal? Or do you bow your head and listen to the wisdom of your elders?\n"
             human_a_2 = [
                 "If you demand your rights, increase Nature by one.",
                 "If you listen to the wisdom of the elder ones, take a second wise: Elf-wise, Dwarf-wise or Politics-wise.",
             ]
-            human_q_3 = "Would you flee from the hordes of goblins, beasts and monsters who prey on civilization? Or will you plunge into their midst, questing for glory?\n"
+            human_q_3 = "\nWould you flee from the hordes of goblins, beasts and monsters who prey on civilization? Or will you plunge into their midst, questing for glory?\n"
             human_a_3 = [
                 "If you would flee and hide inside the walls of tall citadels, increase your Nature by one.",
                 "If you do not fear those who prey on civilization, you may replace your home trait with Loner, Foolhardy or Defender. If you have one of these traits already, increase it by one.",
             ]
             answer1 = pyip.inputMenu(prompt=human_q_1, choices=human_a_1, lettered=True)
-            answer2 = pyip.inputMenu(prompt=human_q_2, choices=human_a_2, lettered=True)
-            answer3 = pyip.inputMenu(prompt=human_q_3, choices=human_a_3, lettered=True)
+
             if answer1 == human_a_1[0]:
                 self.nature["max_rating"] += 1
             else:
                 # increase class_trait to level 2
                 self.traits[traits_per_class[self.class_]] = 2
+            answer2 = pyip.inputMenu(prompt=human_q_2, choices=human_a_2, lettered=True)
             if answer2 == human_a_2[0]:
                 self.nature["max_rating"] += 1
             else:
@@ -466,6 +478,7 @@ class Character:
                     lettered=True,
                 )
                 self.wises.append(new_wise_selected)
+            answer3 = pyip.inputMenu(prompt=human_q_3, choices=human_a_3, lettered=True)
             if answer3 == human_a_3[0]:
                 self.nature["max_rating"] += 1
             else:
@@ -484,8 +497,131 @@ class Character:
 
         # set nature's current rating after the questions
         self.nature["current_rating"] = self.nature["max_rating"]
+        # Circles and relationships
+        print("\n\nLet’s set your Circles and Relationships\n\n")
 
-        self.circles = {"rating": 0, "passed": 0, "failed": 0}
+        self.mentor = {"name": "", "level": 7, "class_": ""}
+
+        self.circles = {"rating": 1, "passed": 0, "failed": 0}
+        circles_q_1 = "\nDo you have friends who enjoy your occasional visits or are you a loner, tough and cool?\n"
+        circles_q_2 = (
+            "\nDo you have parents you can stomach talking to or are you an orphan?\n"
+        )
+
+        circles_q_3 = (
+            "\nDid you have a mentor or did you make your own way in this rough life?\r"
+        )
+
+        circles_q_4 = "Have you made an enemy in your life or have your dubious deeds managed to escape notice?\n"
+        circles_a_1 = [
+            "If you have a friend, add +1 Circles. Some friends will help on the road or in the wild; others will help in towns.",
+            "If you are a loner, tough and cool, your Circles starts at 1, and you have an enemy. Write down the name of your nemesis or mortal enemy on your character sheet and see the Starting Enemy rules.",
+        ]
+        circles_a_2 = [
+            "If you have parents, add +1 Circles. Note your family name or parents’ names on your character sheet. Choose a trade for your parents from your hometown’s skill list.",
+            "If you’re an orphan, you have a keepsake from your parents that is worn around your neck or on one hand (worn/neck or worn/hand). Describe its sentimental value. It is worth 1D of treasure. Put it in your inventory.",
+        ]
+        circles_a_3 = [
+            "If you have a mentor, add +1 Circles. Your mentor is a 7th level adventurer of the same class. Note your mentor’s name on your character sheet. Magicians must select a mentor.",
+            "If you made your own way in life, you start with a pouch of gold coins worth 2D of treasure (belt 1). Put it in your inventory.",
+        ]
+        circles_a_4 = [
+            "If you have made an enemy, add +1 Circles. Note your enemy’s name and see the Starting Enemy rules.",
+            "he benefit for not having an enemy is not having an enemy.",
+        ]
+
+        circles_answer1 = pyip.inputMenu(
+            prompt=circles_q_1, choices=circles_a_1, lettered=True
+        )
+        if circles_answer1 == circles_a_1[1]:
+
+            enemy_name = input(prompt="What is your enemy’s name?")
+            enemy_last_seen = input(prompt="Where did you see them last?\n")
+            self.enemy = {
+                "name": enemy_name,
+                "level": self.level + 1,
+                "last_seen": enemy_last_seen,
+            }
+
+        else:
+            self.circles["rating"] += 1
+            friend_name = input(prompt="What is your friend's name?\n")
+            friend_settlement = ""
+            friend_class = ""
+            friend_type_choices = ["townsfolk", "adventurer"]
+            friend_type = pyip.inputMenu(
+                choices=friend_type_choices,
+                prompt="What type of friend?\n",
+                lettered=True,
+            )
+            if friend_type == friend_type_choices[0]:
+                friend_settlement = input(prompt="Which settlement do they live?\n")
+                friend_skill = pyip.inputMenu(
+                    choices=homes[self.home]["skills"],
+                    prompt="What is your friend’s skill?\n",
+                    lettered=True,
+                )
+            else:
+                friend_class = pyip.inputMenu(
+                    choices=classes,
+                    prompt="What is your friend’s class?\n",
+                    lettered=True,
+                )
+                friend_skill = pyip.inputMenu(
+                    choices=list(skills.keys()),
+                    prompt="What is your friend’s specialty?\n",
+                    lettered=False,
+                )
+            self.friend = {
+                "name": friend_name,
+                "level": self.level,
+                "class_": friend_class,
+                "skill": friend_skill,
+                "settlement": friend_settlement,
+            }
+
+            # following questions only if character has a friend, so inside the last else block
+            circles_answer2 = pyip.inputMenu(
+                prompt=circles_q_2, choices=circles_a_2, lettered=True
+            )
+            if circles_answer2 == circles_a_2[0]:
+                self.circles["rating"] += 1
+                family_name = input(prompt="What’s your family name?\n")
+                family_trade = pyip.inputMenu(
+                    choices=homes[self.home]["skills"],
+                    prompt="What’s your family’s trade?\n",
+                    lettered=True,
+                )
+                self.parents = {"family_name": family_name, "trade": family_trade}
+            else:
+                keepsake = input("What is the keepsake your parents left you?\n")
+                self.inventory["hand_worn"]["slot1"] = keepsake
+            circles_answer3 = pyip.inputMenu(
+                prompt=circles_q_3, choices=circles_a_3, lettered=True
+            )
+            if circles_answer3 == circles_a_3[0]:
+                self.circles["rating"] += 1
+                mentor_name = input(prompt="What is your mentor’s name?\n")
+                self.mentor = {"name": mentor_name, "level": 7, "class_": self.class_}
+            else:
+                self.inventory["belt"]["slot1"] = "Pouch of gold (2D)"
+
+            circles_answer4 = pyip.inputMenu(
+                prompt=circles_q_4, choices=circles_a_4, lettered=True
+            )
+            if circles_answer4 == circles_a_4[0]:
+                self.circles["rating"] += 1
+                enemy_name = input(prompt="What is your enemy’s name?\n")
+                enemy_last_seen = input(prompt="Where did you see them last?\n")
+                self.enemy = {
+                    "name": enemy_name,
+                    "level": self.level + 1,
+                    "last_seen": enemy_last_seen,
+                }
+
+        # Gear
+
+        # generalities
         self.precedence = 3
         self.might = 3
         self.persona = 0
