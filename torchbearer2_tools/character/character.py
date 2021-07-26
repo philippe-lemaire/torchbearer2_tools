@@ -1,5 +1,6 @@
 from torchbearer2_tools.character.skills import skills
 from torchbearer2_tools.character.traits import traits
+from torchbearer2_tools.character.weapons import weapons
 from torchbearer2_tools.roller import Roller
 import pyinputplus as pyip
 
@@ -620,6 +621,44 @@ class Character:
                 }
 
         # Gear
+        ## starting weapon
+        weapons_per_class = {
+            "Burglar": weapons - ["Crossbow", "Great sword", "Halberd", "Polearm"],
+            "Magician": ["Dagger", "Staff"],
+            "Outcast": weapons - ["Great sword"],
+            "Ranger": ["Sword", "Spear", "Bow", "Dagger"],
+            "Theurge": weapons - ["Bow", "Crossbow"],
+            "Warrior": weapons,
+            "Shaman": ["Dagger", "Staff", "Hand axe", "Sling"],
+            "Skald": ["Battle axe", "Dagger", "Hand axe", "Sling", "Spear", "Sword"],
+            "Thief": [
+                "Bow",
+                "Crossbow",
+                "Dagger",
+                "Hand axe",
+                "Mace",
+                "Staff",
+                "Sword",
+            ],
+        }
+
+        self.weapon = pyip.inputMenu(
+            choices=weapons_per_class[self.class_],
+            lettered=True,
+            prompt="Choose your starting weapon…\n",
+        )
+        ## Starting armor
+        armor_wearable_per_class = {
+            "Burglar": ["Leather", "Helmet", "Shield"],
+            "Magician": None,
+            "Outcast": ["any"],
+            "Ranger": ["Leather", "chain", "helmet"],
+            "Theurge": "Shield",
+            "Warrior": ["any"],
+            "Shaman": "Shield",
+            "Skald": ["Leather", "chain", "helmet"],
+            "Thief": "Leather",
+        }
 
         # generalities
         self.precedence = 3
@@ -637,14 +676,12 @@ class Character:
             "sick": False,
             "dead": False,
         }
-        self.friends = []
-        self.enemies = []
-        self.inventory = {}
-        self.weapon = ""
-        self.belief = ""
+
+        self.belief = input("\nWhat is your deeply held Belief?\n")
         self.creed = ""
-        self.instinct = ""
+        self.instinct = input("\nWhat is your instinct?\n")
         self.goal = ""
+        # end of init
 
     def __str__(self):
         return f"""{self.name} is a level {self.level} {self.stock} {self.class_}.
